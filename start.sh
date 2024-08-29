@@ -11,6 +11,7 @@ fi
 INTERFACE_NAME=$(ip -o -4 route show to default | awk '{print $5}')
 
 cp -n ./server_config.toml /config/server_config.toml
+mkdir /config/qlog/
 
 # Run the Rust program with the detected network interface name
 RUST_LOG=error /usr/local/bin/server --local_uplink_device_name "$INTERFACE_NAME" --interface_name tun
