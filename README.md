@@ -4,6 +4,10 @@ Docker container for the [masquerade connect-ip server](https://github.com/ErikB
 
 This is *not* production ready and has 0 security features. Good luck.
 
+**Build** with: `docker build -t masq_server . --network=host`
+
+## Starting the container
+
 The container needs the NET_ADMIN and SYS_MODULE caps, and also the enable the sysctls:
 
 ```
