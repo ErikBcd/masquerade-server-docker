@@ -7,13 +7,13 @@ server_address = "0.0.0.0:4433"
 # Configuration for the virtual network interface used by the server to send IP messages.
 # Only needs to be changed if the current settings conflict with local settings.
 interface_address = "10.8.0.1/8"
-interface_name = "tunMS"
+interface_name = "tun"
 
 # Data of the main uplink device on the system.
 # The ip can be left as is on most systems, but the local_uplink_device_name has to be set to the correct
 # device.
 local_uplink_device_ip = "0.0.0.0"
-local_uplink_device_name = "enp39s0"
+local_uplink_device_name = "eth0"
 
 # Path to where the configuration for the client statics is stored.
 # Configuration contains all clients that connected to the server and asked for a 
@@ -26,4 +26,41 @@ client_config = "./config/server_known_clients.toml"
 
 # If you want qlog files to be created set this to true
 create_qlog_file = false
-qlog_file_path = "./config/qlog/"
+qlog_file_path = "./qlog/"
+
+# The Maximum Transfer Unit for the device interface
+# Setting this too high may cause packet fragmentation
+# Clients should use the same size
+mtu = "1360"
+
+####################################################
+#               QUIC Specific Options              #
+####################################################
+
+## Different options regarding QUIC
+## If you play with these you should know what you are doing
+
+# Congestion algorithm for QUIC to use.
+# One of "cubic", "bbr2", "bbr", "reno"
+congestion_algorithm = "cubic"
+
+# Max rate for pacing. Set 0 for no limit
+max_pacing_rate = 0
+
+# Default = false
+disable_active_migration = false
+
+# Enables hystart++ for slowstart
+enable_hystart = false
+
+# Turn on the PMTU
+discover_pmtu = false
+
+# Delay exponent of QUIC ACKs from the server
+ack_delay_exponent = 3
+
+# Maximum delay of QUIC ACKs from the server
+max_ack_delay = 25
+
+# Maximum idle before the connection gets cut
+max_idle_timeout = 1000
